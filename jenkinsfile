@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from your Git repository
+                git 'https://github.com/yourusername/yourrepository.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                // Compile and package the Java application using Maven
+                sh 'mvn clean package'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Run unit tests using Maven
+                sh 'mvn test'
+            }
+        }
+        
+        stage('Docker Build') {
+            steps {
+                // Build a Docker image
+                sh 'docker build -t yourusername/scientific-calculator .'
+            }
+        }
+        
+        stage('Docker Push') {
+            steps {
+                // Log in to Docker Hub
+                sh 'docker login -u yourusername -p yourpassword'
+                
+                // Push the Docker image to Docker Hub
+                sh 'docker push yourusername/scientific-calculator'
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Clean up any Docker containers and images
+            sh 'docker rm -f $(docker ps -a -q)'
+            sh 'docker rmi -f $(docker images -q)'
+        }
+    }
+}
