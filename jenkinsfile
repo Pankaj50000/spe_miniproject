@@ -32,11 +32,13 @@ pipeline {
         
         stage('Docker Push') {
             steps {
-                // Log in to Docker Hub
-                sh 'docker login -u pankaj5000 -p pankaj.1234'
+              script{
+                     docker.withRegistry(",'DockerHubCred'){
+                    sh 'docker tag calculator pankaj5000/calculator:latest'
                 
                 // Push the Docker image to Docker Hub
                 sh 'docker push pankaj5000/scientific-calculator'
+                   }
             }
         }
     }
