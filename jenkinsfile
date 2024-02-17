@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from your Git repository
-                git 'https://github.com/yourusername/yourrepository.git'
+                git 'https://github.com/Pankaj50000/spe_miniproject.git'
             }
         }
         
@@ -26,17 +26,17 @@ pipeline {
         stage('Docker Build') {
             steps {
                 // Build a Docker image
-                sh 'docker build -t yourusername/scientific-calculator .'
+                sh 'docker build -t pankaj5000/scientific-calculator .'
             }
         }
         
         stage('Docker Push') {
             steps {
                 // Log in to Docker Hub
-                sh 'docker login -u yourusername -p yourpassword'
+                sh 'docker login -u pankaj5000 -p pankaj.1234'
                 
                 // Push the Docker image to Docker Hub
-                sh 'docker push yourusername/scientific-calculator'
+                sh 'docker push pankaj5000/scientific-calculator'
             }
         }
     }
