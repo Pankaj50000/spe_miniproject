@@ -1,7 +1,6 @@
-                                                                                          
 pipeline {
     agent any
-
+    
     stages {
         stage('Checkout') {
             steps {
@@ -9,38 +8,39 @@ pipeline {
                 git 'https://github.com/Pankaj50000/spe_miniproject.git'
             }
         }
-
+        
         stage('Build') {
             steps {
                 // Compile and package the Java application using Maven
                 sh 'mvn clean package'
             }
         }
-
+        
         stage('Test') {
             steps {
                 // Run unit tests using Maven
                 sh 'mvn test'
             }
         }
-
+        
         stage('Docker Build') {
             steps {
                 // Build a Docker image
-                sh 'docker build -t pankaj5000/calculator .'
+                sh 'docker build -t pankaj5000/scientific-calculator .'
             }
         }
-
+        
         stage('Docker Push') {
             steps {
                 // Log in to Docker Hub
                 sh 'docker login -u pankaj5000 -p pankaj.1234'
-
+                
                 // Push the Docker image to Docker Hub
-                sh 'docker pankaj5000/scientific-calculator'
+                sh 'docker push pankaj5000/scientific-calculator'
             }
         }
     }
+    
     post {
         always {
             // Clean up any Docker containers and images
@@ -49,4 +49,3 @@ pipeline {
         }
     }
 }
-
