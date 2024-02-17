@@ -33,7 +33,7 @@ pipeline {
         stage('Docker Push') {
             steps {
               script{
-                     docker.withRegistry(",'DockerHubCred'){
+                     docker.withRegistry('','DockerHubCred'){
                     sh 'docker tag calculator pankaj5000/calculator:latest'
                 
                 // Push the Docker image to Docker Hub
