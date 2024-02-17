@@ -26,17 +26,17 @@ pipeline {
         stage('Docker Build') {
             steps {
                 // Build a Docker image
-                sh 'sudo docker build -t pankaj5000/scientific-calculator .'
+                sh 'docker build -t pankaj5000/scientific-calculator .'
             }
         }
         
         stage('Docker Push') {
             steps {
                 // Log in to Docker Hub
-                sh 'sudo docker login -u pankaj5000 -p pankaj.1234'
+                sh 'docker login -u pankaj5000 -p pankaj.1234'
                 
                 // Push the Docker image to Docker Hub
-                sh 'sudo docker push pankaj5000/scientific-calculator'
+                sh 'docker push pankaj5000/scientific-calculator'
             }
         }
     }
@@ -44,8 +44,8 @@ pipeline {
     post {
         always {
             // Clean up any Docker containers and images
-            sh 'sudo docker rm -f $(docker ps -a -q)'
-            sh 'sudo docker rmi -f $(docker images -q)'
+            sh 'docker rm -f $(docker ps -a -q)'
+            sh 'docker rmi -f $(docker images -q)'
         }
     }
 }
