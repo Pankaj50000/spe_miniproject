@@ -41,11 +41,11 @@ pipeline {
         }
     }
     
-    post {
-        always {
+    //post {
+      //  always {
             // Clean up any Docker containers and images
-            sh 'docker rm -f $(docker ps -a -q)'
-            sh 'docker rmi -f $(docker images -q)'
-        }
-    }
+        //    sh 'docker rm -f $(docker ps -a -q)'
+          //  sh 'docker rmi -f $(docker images -q)'
+       // }
+   // }
 }
