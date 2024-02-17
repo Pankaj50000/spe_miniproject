@@ -39,7 +39,19 @@ pipeline {
                 sh 'docker push pankaj5000/scientific-calculator'
             }
         }
+
+      stage('Run Ansible Playbook') {
+    steps {
+        script {
+            ansiblePlaybook(
+                playbook: 'deploy.yml',
+                inventory: 'inventory'
+            )
+        }
     }
+  }
+}
+
     
     //post {
       //  always {
