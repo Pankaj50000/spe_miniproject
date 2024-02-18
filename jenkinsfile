@@ -40,17 +40,16 @@ pipeline {
             }
         }
 
+       
         stage('Run Ansible Playbook') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'localhost', keyFileVariable: 'SSH_PRIVATE_KEY', passphraseVariable: '', usernameVariable: 'SSH_USER')]) {
-                    script {
-                        ansiblePlaybook(
-                            playbook: 'deploy.yml',
-                            inventory: 'inventory',
-                            sshPrivateKey: env.SSH_PRIVATE_KEY,
-                            sshUser: env.SSH_USER
-                        )
-                    }
+                script {
+                    ansiblePlaybook(
+                        playbook: 'deploy.yml',
+                        inventory: 'inventory',
+                        credentialsId: 'localhost',
+                        connection: 'local'
+                    )
                 }
             }
         }
