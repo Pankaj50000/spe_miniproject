@@ -46,15 +46,16 @@ pipeline {
        
         stage('Run Ansible Playbook') {
             steps {
-                script {
-                    ansiblePlaybook(
-                        playbook: 'deploy.yml',
-                        inventory: 'inventory',
-                        credentialsId: 'localhost',
-                        connection: 'local'
-                       ansiblePythonInterpreter: '/usr/bin/python3' // Specify the path to the Python 3 interpreter
-                    )
-                }
+                //script {
+                    //ansiblePlaybook(
+                      //  playbook: 'deploy.yml',
+                        //inventory: 'inventory',
+                        //credentialsId: 'localhost',
+                        //connection: 'local'
+                       //ansiblePythonInterpreter: '/usr/bin/python3' // Specify the path to the Python 3 interpreter
+                    //)
+                    sh 'ansible-playbook deploy.yml' 
+                //}
             }
         }
     }
