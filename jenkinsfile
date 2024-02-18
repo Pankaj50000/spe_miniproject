@@ -55,7 +55,7 @@ pipeline {
                        //ansiblePythonInterpreter: '/usr/bin/python3' // Specify the path to the Python 3 interpreter
                     //)
                     //sh 'ansible-playbook deploy.yml' 
-                    sh 'ansible-playbook -vvv deploy.yml --extra-vars "ansible_python_interpreter=/usr/bin/python3"'
+                    sh 'ansible-playbook -vvv deploy.yml --extra-vars "ansible_python_interpreter=/bin/python3"'
                 //}
             }
         }
