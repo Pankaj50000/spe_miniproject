@@ -40,25 +40,19 @@ pipeline {
             }
         }
 
-      stage('Run Ansible Playbook') {
-    steps {
-        script {
-            ansiblePlaybook(
-                playbook: 'deploy.yml',
-                inventory: 'inventory'
-                credentialsId: 'localhost'
-            )
+        stage('Run Ansible Playbook') {
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'localhost', keyFileVariable: 'SSH_PRIVATE_KEY', passphraseVariable: '', usernameVariable: 'SSH_USER')]) {
+                    script {
+                        ansiblePlaybook(
+                            playbook: 'deploy.yml',
+                            inventory: 'inventory',
+                            sshPrivateKey: env.SSH_PRIVATE_KEY,
+                            sshUser: env.SSH_USER
+                        )
+                    }
+                }
+            }
         }
     }
-  }
-}
-
-    
-    //post {
-      //  always {
-            // Clean up any Docker containers and images
-        //    sh 'docker rm -f $(docker ps -a -q)'
-          //  sh 'docker rmi -f $(docker images -q)'
-       // }
-   // }
 }
