@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools{
+        ansible 'Ansible'
+    }
     
     stages {
         stage('Checkout') {
@@ -49,6 +52,7 @@ pipeline {
                         inventory: 'inventory',
                         credentialsId: 'localhost',
                         connection: 'local'
+                       ansiblePythonInterpreter: '/usr/bin/python3' // Specify the path to the Python 3 interpreter
                     )
                 }
             }
