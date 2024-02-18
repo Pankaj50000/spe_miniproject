@@ -46,6 +46,7 @@ pipeline {
             ansiblePlaybook(
                 playbook: 'deploy.yml',
                 inventory: 'inventory'
+                credentialsId: 'localhost'
             )
         }
     }
