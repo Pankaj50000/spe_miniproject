@@ -1,1 +1,1 @@
-# spe_miniproject
+# spe_miniproject scientific-calculator
